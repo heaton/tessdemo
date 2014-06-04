@@ -1,4 +1,4 @@
-package com.heaton.ocr;
+package me.heaton.ocr;
 
 import java.io.File;
 
@@ -8,7 +8,8 @@ import net.sourceforge.tess4j.TesseractException;
 public class TessExample {
 
 	public static void main(String[] args) {
-		File imageFile = new File("eurotext.tif");
+		String fileName = TessExample.class.getResource("/eurotext.tif").getFile();
+		File imageFile = new File(fileName);
 		Tesseract instance = Tesseract.getInstance();
 
 		try {
@@ -18,4 +19,5 @@ public class TessExample {
 			e.printStackTrace();
 		}
 	}
+
 }
