@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/jai_imageio.jar" sourcepath="/Users/HeatoN/Documents/tess/Tess4J/src"/>
+	<classpathentry kind="lib" path="lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/tess4j.jar" sourcepath="/Users/HeatoN/Documents/tess/Tess4J/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
