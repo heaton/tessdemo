@@ -45,23 +45,6 @@
           </archive>
         </configuration>
       </plugin>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.3</version>
-          <executions>
-            <execution>
-              <phase>pachage</phase>
-              <goals>
-                <goal>single</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <descriptorRefs>
-              <descriptorRef>jar-with-dependencies</descriptorRef>
-            </descriptorRefs>
-          </configuration>
-        </plugin>
     </plugins>
   </build>
 </project>
