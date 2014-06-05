@@ -14,7 +14,7 @@
       <artifactId>jai</artifactId>
       <version>1.1</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/lib/jai_imageio.jar</systemPath>
+      <systemPath>${project.basedir}/lib/jai-imageio.jar</systemPath>
     </dependency>
   	<dependency>
       <groupId>tess4j</groupId>
@@ -23,6 +23,12 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/tess4j.jar</systemPath>
     </dependency>
+  	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>javax.servlet-api</artifactId>
+  		<version>3.0.1</version>
+  		<scope>provided</scope>
+  	</dependency>
   </dependencies>
   <build>
     <plugins>
@@ -35,16 +41,22 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.2</version>
+        <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <archive>
-            <manifest>
-              <mainClass>me.heaton.ocr.TessExample</mainClass>
-            </manifest>
-          </archive>
+          <webResources>
+            <resource>
+              <directory>${project.basedir}/lib</directory>
+              <targetPath>WEB-INF/lib</targetPath>
+              <filtering>true</filtering>
+              <includes>
+                <include>jai-imageio.jar</include>
+                <include>tess4j.jar</include>
+              </includes>
+            </resource>
+          </webResources>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <packaging>war</packaging>
 </project>

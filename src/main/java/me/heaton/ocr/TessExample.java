@@ -8,7 +8,7 @@ import net.sourceforge.tess4j.TesseractException;
 public class TessExample {
 
 	public static void main(String[] args) {
-		String fileName = TessExample.class.getResource("/eurotext.tif").getFile();
+		String fileName = TessExample.class.getResource("/eurotext.png").getFile();
 		File imageFile = new File(fileName);
 		Tesseract instance = Tesseract.getInstance();
 
