@@ -48,7 +48,6 @@
             <resource>
               <directory>${project.basedir}/lib</directory>
               <targetPath>WEB-INF/lib</targetPath>
-              <filtering>true</filtering>
               <includes>
                 <include>jai-imageio.jar</include>
                 <include>tess4j.jar</include>
