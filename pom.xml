@@ -3,6 +3,7 @@
   <groupId>me.heaton</groupId>
   <artifactId>tessdemo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
   <dependencies>
   	<dependency>
   		<groupId>net.java.dev.jna</groupId>
@@ -57,6 +58,6 @@
         </configuration>
       </plugin>
     </plugins>
+    <finalName>tessdemo</finalName>
   </build>
-  <packaging>war</packaging>
 </project>
