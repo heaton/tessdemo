@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItem;
 
 public class FileItemList {
 

@@ -3,9 +3,9 @@ package me.heaton.helper;
 import java.io.File;
 import java.io.IOException;
 
-import me.heaton.ocr.OcrEngine;
+import org.apache.commons.fileupload.FileItem;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
+import me.heaton.ocr.OcrEngine;
 
 public class FileHandler {
 

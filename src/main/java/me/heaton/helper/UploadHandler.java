@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletContext;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItem;
 import org.json.JSONObject;
 
 public class UploadHandler {

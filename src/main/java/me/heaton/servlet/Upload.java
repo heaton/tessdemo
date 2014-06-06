@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import me.heaton.helper.FileItemList;
 import me.heaton.helper.UploadHandler;
-import me.heaton.ocr.OcrEngine;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
 
 @WebServlet("/upload")
