@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import me.heaton.helper.FileItemList;
+import me.heaton.helper.UploadHandler;
+import me.heaton.ocr.OcrEngine;
+
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
@@ -26,33 +30,29 @@ public class Upload extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-        if (!ServletFileUpload.isMultipartContent(request)) {
+        checkMultipartForm(request);
+
+		FileItemList reqs = parseRequest(request);
+
+		UploadHandler handler = new UploadHandler(getServletContext());
+		JSONObject resp = handler.operate(reqs);
+		writeToResponse(response, resp);
+	}
+
+	private void checkMultipartForm(HttpServletRequest request) {
+		if (!ServletFileUpload.isMultipartContent(request)) {
             throw new IllegalArgumentException("Request is not multipart, please 'multipart/form-data' enctype for your form.");
         }
+	}
 
-        JSONObject resp = new JSONObject();
-        resp.put("result", "success");
-        ServletFileUpload upload = getRequestHandler();
-
-        try {
-        	JSONObject data = new JSONObject();
+	private FileItemList parseRequest(HttpServletRequest request) throws IOException{
+		ServletFileUpload upload = getRequestHandler();
+		try {
 			List<FileItem> items = upload.parseRequest(request);
-			for(FileItem item : items) {
-				if(item.isFormField()) {
-					data.put(item.getFieldName(), item.getString());
-				}else if(!item.isFormField()) {
-					String value = item.getName() + "," + item.getSize() + ","
-							+ item.getContentType();
-					data.put(item.getFieldName(), value);
-				}
-			}
-			resp.put("data", data);
+			return new FileItemList(items);
 		} catch (FileUploadException e) {
 			throw new IOException(e);
 		}
-        response.setContentType("application/json");
-        response.getWriter().write(resp.toString());
-        response.getWriter().close();
 	}
 
 	private ServletFileUpload getRequestHandler() {
@@ -68,6 +68,13 @@ public class Upload extends HttpServlet{
 	private File getTempdir() {
 		ServletContext servletContext = getServletContext();
         return (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+	}
+
+	private void writeToResponse(HttpServletResponse response, JSONObject resp)
+			throws IOException {
+		response.setContentType("application/json");
+		response.getWriter().write(resp.toString());
+		response.getWriter().close();
 	}
 
 }

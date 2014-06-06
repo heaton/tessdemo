@@ -19,7 +19,7 @@
 			</div>
 			<div class="col-md-6">
 				<h3>Result</h3>
-				<pre>${result}</pre>
+				<pre id="ocrResult">${result}</pre>
 				<form action="upload" method="POST" enctype="multipart/form-data">
 					<input type="file" id="file" name="file" />
 					<!--

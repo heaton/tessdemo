@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
+import me.heaton.ocr.OcrEngine;
 
 @WebServlet("/index")
 public class Index extends HttpServlet {
@@ -30,12 +29,7 @@ public class Index extends HttpServlet {
 	}
 
 	private String ocr(File file) {
-		Tesseract instance = Tesseract.getInstance();
-		try {
-			return instance.doOCR(file);
-		} catch (TesseractException e) {
-			return e.getMessage();
-		}
+		return new OcrEngine().result(file);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
