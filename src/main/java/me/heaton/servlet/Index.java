@@ -19,15 +19,22 @@ public class Index extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		String fileName = getServletContext().getRealPath("/tessdir/eurotext.png");
+		String imgPath = "/tessdir/eurotext.png";
+		request.setAttribute("imgPath", getServletContext().getContextPath() + imgPath);
+		String fileName = getServletContext().getRealPath(imgPath);
 		File imageFile = new File(fileName);
-		Tesseract instance = Tesseract.getInstance();
+		String result = ocr(imageFile);
+		request.setAttribute("result", result);
+		
+		request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+	}
 
+	private String ocr(File file) {
+		Tesseract instance = Tesseract.getInstance();
 		try {
-			String result = instance.doOCR(imageFile);
-			response.getWriter().println(result);
+			return instance.doOCR(file);
 		} catch (TesseractException e) {
-			e.printStackTrace();
+			return e.getMessage();
 		}
 	}
 

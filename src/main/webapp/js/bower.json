@@ -1,0 +1,20 @@
+{
+  "name": "tessdemo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/heaton/tessdemo",
+  "authors": [
+    "HeatoN <heaton.cai@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "bootstrap-progressbar": "~0.7.1"
+  }
+}
