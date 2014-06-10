@@ -2,7 +2,9 @@ package me.heaton.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import me.heaton.helper.FileItemList;
 import me.heaton.helper.UploadHandler;
+import me.heaton.ocr.OcrEngine;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -24,6 +27,34 @@ import org.json.JSONObject;
 public class Upload extends HttpServlet{
 
 	private static final long serialVersionUID = 4220745755155487595L;
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String areas = request.getParameter("ocr_areas");
+		String fileName = request.getParameter("file_name");
+		if(areas == null || areas.isEmpty() || fileName == null || fileName.isEmpty()){
+			return;
+		}
+
+		StringReader sr = new StringReader(areas);
+		Properties ocrAreas = new Properties();
+		ocrAreas.load(sr);
+
+		File file = new File(getServletContext().getRealPath(fileName));
+		OcrEngine ocr = new OcrEngine();
+		StringBuilder result = new StringBuilder();
+		for(Object name : ocrAreas.keySet()) {
+			String area = ocrAreas.get(name).toString();
+			ocr.chooseArea(area);
+			String text = ocr.result(file);
+			result.append(name).append(":").append(text).append("\n\n");
+		}
+		JSONObject resp = new JSONObject();
+		resp.put("result", "success");
+		resp.put("data", result.toString());
+		writeToResponse(response, resp);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

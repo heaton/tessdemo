@@ -50,6 +50,7 @@ public class UploadHandler {
 		JSONObject resp = new JSONObject();
 		resp.put("result", "success");
 		resp.put("imgPath", context.getContextPath() + filePath);
+		resp.put("imgName", filePath);
 		resp.put("ocrResult", ocrResult);
 		return resp;
 	}

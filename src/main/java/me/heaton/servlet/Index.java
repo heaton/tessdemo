@@ -20,6 +20,7 @@ public class Index extends HttpServlet {
 		response.setContentType("text/html");
 		String imgPath = "/tessdir/eurotext.png";
 		request.setAttribute("imgPath", getServletContext().getContextPath() + imgPath);
+		request.setAttribute("imgName", imgPath);
 		String fileName = getServletContext().getRealPath(imgPath);
 		File imageFile = new File(fileName);
 		String result = ocr(imageFile);
