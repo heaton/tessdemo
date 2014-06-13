@@ -11,6 +11,8 @@ public class TessExample {
 		String fileName = TessExample.class.getResource("/eurotext.png").getFile();
 		File imageFile = new File(fileName);
 		Tesseract instance = Tesseract.getInstance();
+		String path = new File(TessExample.class.getResource("/").getPath()).getAbsolutePath();
+		instance.setDatapath(path);
 
 		try {
 			String result = instance.doOCR(imageFile);
