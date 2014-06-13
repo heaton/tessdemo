@@ -3,7 +3,7 @@
     if(data.result == "success") {
       var rn = Math.floor(10000 * Math.random());
       $("#picture img").attr("src", data.imgPath + "?v=" + rn);
-      $("#ocrResult").empty().append(data.ocrResult);
+      $("#ocrResult").text(data.ocrResult);
       $("#img_name").val(data.imgName);
     } else {
       $("#message").text('errors:' + data.message);

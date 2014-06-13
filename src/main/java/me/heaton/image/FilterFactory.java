@@ -20,7 +20,7 @@ import com.jhlabs.image.UnsharpFilter;
 
 public class FilterFactory {
 
-	private static final String COMMAND_SPLIT = "|";
+	private static final String COMMAND_SPLIT = "\\|";
 	private static final String REGEX_COMMAND = "^\\w+(:(\\w|\\.)+)*(\\|\\w+(:\\w+)*)*$";
 
 	/**

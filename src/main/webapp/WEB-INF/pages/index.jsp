@@ -36,7 +36,7 @@
 					<input type="checkbox" id="gray" value="gs"/> Gray
 				</label></div>
 				<div class="checkbox"><label>
-					<input type="checkbox" id="thresholding" value="ht"/> Thresholding
+					<input type="checkbox" id="thresholding" value="th"/> Thresholding
 				</label></div>
 				<div class="checkbox"><label>
 					<input type="checkbox" id="gamma" value="gm"/> Gamma
@@ -57,9 +57,6 @@
 				<div class="checkbox"><label>
 					<input type="checkbox" id="hsba" value="ha"/> HSB Adjust+
 				</label></div>
-				<div class="checkbox"><label>
-					<input type="checkbox" id="invert" value="iv"/> Invert
-				</label></div>
 				<br>
 				<div class="checkbox"><label>
 					<input type="checkbox" id="posterize" value="pt"/> Posterize
@@ -75,6 +72,10 @@
 				</label></div>
 				<div class="checkbox"><label>
 					<input type="checkbox" id="laplace" value="lp"/> Edge by Laplace operator
+				</label></div>
+				<br/>
+				<div class="checkbox"><label>
+					<input type="checkbox" id="invert" value="iv"/> Invert
 				</label></div>
 				</div>
 				<div class="form-group">

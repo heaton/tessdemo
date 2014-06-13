@@ -25,7 +25,7 @@ public class OcrEngine {
 		String path = new File(TessExample.class.getResource("/").getPath()).getAbsolutePath();
 		instance.setDatapath(path);
 		instance.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_ONLY);
-		setWhiteList(WHITELIST_DEFAULT);
+		//setWhiteList(WHITELIST_DEFAULT);
 		setLanguage(ENG);
 	}
 
