@@ -13,7 +13,7 @@ To install tesseract please check this link below:
 For Windows:
 Please install <a href="http://www.microsoft.com/en-us/download/details.aspx?id=30679" target="_blank">Visual C++ Redistributable for VS2012</a> or <a href="http://www.microsoft.com/en-au/download/details.aspx?id=40784" target="_blank">Visual C++ Redistributable for VS2013</a>.
 
-Simplely to test the environment just run me.heaton.TessExample.
+Simplely to test the environment just run me.heaton.ocr.TessExample.
 
 To test other functions you need run it in a tomcat container. Just use "maven install" to produce tessdemo.war then do anything you want.
 
