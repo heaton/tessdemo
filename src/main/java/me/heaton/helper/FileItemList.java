@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.fileupload.FileItem;
 
-public class FileItemList {
+public class FileItemList implements HttpParam {
 
 	private Map<String, FileItem> params;
 	
@@ -21,14 +21,21 @@ public class FileItemList {
 		}
 	}
 	
+	@Override
 	public String getParam(String name){
 		FileItem item = params.get(name);
 		if(item==null) return null;
 		return item.getString();
 	}
 	
+	@Override
 	public FileItem getFile(String name){
 		return params.get(name);
+	}
+
+	@Override
+	public String[] getParams(String name) {
+		return null;
 	}
 	
 }

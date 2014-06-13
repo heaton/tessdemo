@@ -1,5 +1,6 @@
 package me.heaton.helper;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletContext;
@@ -13,30 +14,60 @@ public class UploadHandler {
 
 	private ServletContext context;
 
-	private String filePath;
-	private String ocrResult;
+	private FileName fileName;
+	private AreaList areas;
+
+	private ImageHandler image;
 
 	public UploadHandler(ServletContext context) {
 		this.context = context;
 	}
 
-	public JSONObject operate(FileItemList reqs) throws IOException {
+	public JSONObject saveFileAndOcr(HttpParam reqs) throws IOException {
 		FileItem file = reqs.getFile("file");
 		if (file == null) {
 			return wrongJson("no file to find");
 		}
-		filePath = TESSDIR + file.getName();
-		ocrResult = saveThenOcr(file);
-
-        return successJson();
+		fileName = new FileName(TESSDIR + file.getName());
+		save(file);
+		
+		return ocr(reqs);
 	}
 
-	private String saveThenOcr(FileItem file)
+	private void save(FileItem file)
 			throws IOException {
-		String realPath = context.getRealPath(filePath);
-		FileHandler fileHandler = new FileHandler(realPath);
+		FileHandler fileHandler = new FileHandler(oriImgFile());
 		fileHandler.saveFile(file);
-		return fileHandler.ocr();
+	}
+
+	private JSONObject ocr(HttpParam reqs) throws IOException {
+		areas = new AreaList(reqs.getParam("ocr_areas"));
+		String command = reqs.getParam("command");
+
+		String whiteList = reqs.getParam("white_list");
+		String language = reqs.getParam("language");
+
+		image = new ImageHandler(oriImgFile());
+		image.filterThenOcr(command, whiteList, language, areas);
+		image.saveImage(fileName.suffix(), newImgFile());
+
+		return successJson();
+	}
+
+	public JSONObject checkFileAndOcr(HttpParam reqs) throws IOException {
+		fileName = new FileName(reqs.getParam("file_name"));
+		if(fileName.isEmpty()){
+			return wrongJson("miss file_name");
+		}
+		return ocr(reqs);
+	}
+
+	private File oriImgFile() {
+		return new File(context.getRealPath(fileName.get()));
+	}
+
+	private File newImgFile() {
+		return new File(context.getRealPath(fileName.newName()));
 	}
 
 	private JSONObject wrongJson(String message) {
@@ -49,9 +80,9 @@ public class UploadHandler {
 	private JSONObject successJson() {
 		JSONObject resp = new JSONObject();
 		resp.put("result", "success");
-		resp.put("imgPath", context.getContextPath() + filePath);
-		resp.put("imgName", filePath);
-		resp.put("ocrResult", ocrResult);
+		resp.put("imgPath", context.getContextPath() + fileName.newName());
+		resp.put("imgName", fileName.get());
+		resp.put("ocrResult", image.ocrResult());
 		return resp;
 	}
 
