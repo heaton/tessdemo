@@ -1,4 +1,4 @@
-package me.heaton;
+package me.heaton.helper;
 
 import static org.junit.Assert.*;
 
