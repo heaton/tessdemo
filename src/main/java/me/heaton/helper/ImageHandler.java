@@ -24,14 +24,13 @@ public class ImageHandler {
 		ocrResult = new StringBuilder();
 	}
 
-	public void filterThenOcr(String command, String whiteList, String language, AreaList areas) throws IOException {
-		filterImage(command);
+	public void ocr(String whiteList, String language, AreaList areas) throws IOException {
 		ocrEngine.setWhiteList(whiteList);
 		ocrEngine.setLanguage(language);
 		ocr(areas);
 	}
 
-	private void filterImage(String command) throws IOException {
+	public void filter(String command) throws IOException {
 		image = imageFilter.filterFromCommand(command);
 	}
 

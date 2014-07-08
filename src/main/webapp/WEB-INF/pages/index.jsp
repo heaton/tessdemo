@@ -13,7 +13,7 @@
 <script type="text/javascript" src="js/jquery.freetrans.js"></script>
 <script type="text/javascript" src="js/drawer.js"></script>
 <script type="text/javascript" src="js/picdrag.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/app.js?v=1.1"></script>
 </head>
 <body>
 <div id="message" class="alert alert-warning"></div>
@@ -73,28 +73,39 @@
 				<div class="checkbox"><label>
 					<input type="checkbox" id="laplace" value="lp"/> Edge by Laplace operator
 				</label></div>
-				<br/>
+				<br>
 				<div class="checkbox"><label>
 					<input type="checkbox" id="invert" value="iv"/> Invert
 				</label></div>
+				<div class="checkbox"><label>
+					<input type="checkbox" id="bump" value="bu"/> Bump
+				</label></div>
+				<div class="checkbox"><label>
+					<input type="checkbox" id="blur" value="bl"/> Blur
+				</label></div>
+				<div class="checkbox"><label>
+					<input type="checkbox" id="smart_blur" value="sb"/> Smart Blur
+				</label></div>
+				<br>
+					<label for="command">Command:</label>
+				    <input type="text" id="command" readonly/>
 				</div>
 				<div class="form-group">
 					<label for="white_list">White list:</label>
-					<input type="text" id="white_list" class="form-control"/>
+					<input type="text" id="white_list"/>
+				    <div class="radio"><label>
+					   <input type="radio" name="language" value="eng" checked> English
+					</label></div>
+				    <div class="radio"><label>
+					   <input type="radio" name="language" value="chi_sim"> Simplified Chinese
+					</label></div>
 				</div>
-				<div class="radio">
-					<label>
-					<input type="radio" name="language" value="eng" checked>
-					English
-					</label>
+				<div class="form-action">
+				    <div class="checkbox"><label>
+					   <input type="checkbox" id="ocr" value="yes"/> Ocr
+				    </label></div>
+				    <button id="req_send" type="button" class="btn btn-default">Check</button>
 				</div>
-				<div class="radio">
-					<label>
-					<input type="radio" name="language" value="chi_sim">
-					Simplified Chinese
-					</label>
-				</div>
-				<button id="req_send" type="button" class="btn btn-default">Check</button>
 				</form>
 				<textarea id="parameters" style="width:100%;height:180px" readonly></textarea>
 				<input type="hidden" id="img_name" value="${imgName}"/>

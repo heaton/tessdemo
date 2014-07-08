@@ -2,6 +2,8 @@ package me.heaton.image;
 
 import java.awt.image.BufferedImageOp;
 
+import com.jhlabs.image.BlurFilter;
+import com.jhlabs.image.BumpFilter;
 import com.jhlabs.image.DespeckleFilter;
 import com.jhlabs.image.DoGFilter;
 import com.jhlabs.image.EdgeFilter;
@@ -15,6 +17,7 @@ import com.jhlabs.image.MedianFilter;
 import com.jhlabs.image.PosterizeFilter;
 import com.jhlabs.image.ReduceNoiseFilter;
 import com.jhlabs.image.SharpenFilter;
+import com.jhlabs.image.SmartBlurFilter;
 import com.jhlabs.image.ThresholdFilter;
 import com.jhlabs.image.UnsharpFilter;
 
@@ -97,6 +100,15 @@ public class FilterFactory {
 		}
 		if("lp".equals(com.name)) {
 			return new LaplaceFilter();
+		}
+		if("bu".equals(com.name)) {
+		    return new BumpFilter();
+		}
+		if("bl".equals(com.name)) {
+		    return new BlurFilter();
+		}
+		if("sb".equals(com.name)) {
+		    return new SmartBlurFilter();
 		}
 		return null;
 	}

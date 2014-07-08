@@ -31,7 +31,7 @@ public class UploadHandler {
 		fileName = new FileName(TESSDIR + file.getName());
 		save(file);
 		
-		return ocr(reqs);
+		return processImg(reqs);
 	}
 
 	private void save(FileItem file)
@@ -40,15 +40,20 @@ public class UploadHandler {
 		fileHandler.saveFile(file);
 	}
 
-	private JSONObject ocr(HttpParam reqs) throws IOException {
-		areas = new AreaList(reqs.getParam("ocr_areas"));
+	private JSONObject processImg(HttpParam reqs) throws IOException {
 		String command = reqs.getParam("command");
 
 		String whiteList = reqs.getParam("white_list");
 		String language = reqs.getParam("language");
+		areas = new AreaList(reqs.getParam("ocr_areas"));
+
+		String needOcr = reqs.getParam("ocr");
 
 		image = new ImageHandler(oriImgFile());
-		image.filterThenOcr(command, whiteList, language, areas);
+		image.filter(command);
+		if("yes".equals(needOcr)) {
+		    image.ocr(whiteList, language, areas);
+		}
 		image.saveImage(fileName.suffix(), newImgFile());
 
 		return successJson();
@@ -59,7 +64,7 @@ public class UploadHandler {
 		if(fileName.isEmpty()){
 			return wrongJson("miss file_name");
 		}
-		return ocr(reqs);
+		return processImg(reqs);
 	}
 
 	private File oriImgFile() {
