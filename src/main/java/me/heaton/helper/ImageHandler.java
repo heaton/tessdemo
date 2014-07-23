@@ -34,6 +34,13 @@ public class ImageHandler {
 		image = imageFilter.filterFromCommand(command);
 	}
 
+    public void findEage() {
+        EdgeFinder edge = new EdgeFinder();
+		BufferedImage temp = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        edge.filter(image, temp);
+        ocrResult.append(edge.result());
+    }
+
 	private void ocr(AreaList oreas) {
 		ocrResult.append(ocrEngine.result(image));
 		for(Area area : oreas) {

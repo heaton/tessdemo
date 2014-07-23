@@ -51,6 +51,7 @@ public class UploadHandler {
 
 		image = new ImageHandler(oriImgFile());
 		image.filter(command);
+		image.findEage();
 		if("yes".equals(needOcr)) {
 		    image.ocr(whiteList, language, areas);
 		}
