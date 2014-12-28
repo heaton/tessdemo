@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker run -v `pwd`:/usr/local/app -w /usr/local/app heaton/tessdemo:latest mvn clean install
+

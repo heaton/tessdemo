@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker run -v `pwd`:/usr/local/app -w /usr/local/app heaton/tessdemo:latest java -cp "lib/jai-imageio.jar:lib/tess4j.jar:target/tessdemo/WEB-INF/lib/jna-4.1.0.jar:target/classes" me.heaton.ocr.TessExample
+
